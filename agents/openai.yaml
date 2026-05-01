@@ -1,0 +1,5 @@
+interface:
+  display_name: "HubSpot Developer"
+  short_description: "Build modern HubSpot developer platform apps and UI extensions."
+  icon: "code"
+  brand_color: "#ff5c35"
