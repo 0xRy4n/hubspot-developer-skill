@@ -1,6 +1,6 @@
 ---
 name: hubspot-developer-skill
-description: use this skill when building, reviewing, migrating, or planning hubspot developer platform apps (cli projects, app-hsmeta.json), ui extensions (app cards, app pages, settings), @hubspot/ui-extensions components, crm hooks and crm data/action components, hubspot.fetch and serverless functions, oauth vs static token distribution, webhooks, custom workflow actions, agent tools, app events/objects, scopes and sensitive data, or marketplace readiness. use for coding agents that need architecture, extension-point choice, file layout, component selection, security constraints, checklists, and testing guidance.
+description: use this skill when building, reviewing, migrating, or planning hubspot developer platform apps (cli projects, app-hsmeta.json), ui extensions (app cards, app pages, settings), @hubspot/ui-extensions components, crm hooks and crm data/action components, hubspot.fetch and serverless app-function hsmeta (config.endpoint, endpoint.methods array), hs project validate upload errors, oauth vs static token distribution, webhooks, custom workflow actions, agent tools, app events/objects, scopes and sensitive data, or marketplace readiness. use for coding agents that need architecture, extension-point choice, file layout, component selection, security constraints, checklists, and testing guidance.
 ---
 
 # HubSpot Developer Skill
@@ -126,6 +126,17 @@ For layout, use **Flex**, **Box**, **Inline**, **Spacer**, **AutoGrid**, etc., p
 - **React tree**: standard + CRM components; loading / empty / error / permission states.
 - **Optional** `hubspot.fetch()` to partner backends; optional **serverless functions** where docs allow for your auth model.
 
+## App-function `*-hsmeta.json` (serverless) and `hs project upload`
+
+`app-function` components use **`"type": "app-function"`** and **`config.entrypoint`** (see [serverless reference](https://developers.hubspot.com/docs/apps/developer-platform/add-features/serverless-functions/reference)). **`hs project validate`** / **`hs project upload`** may fail if HTTP-oriented functions omit **`config.endpoint`**.
+
+**Common validation errors (real CLI output):**
+
+- **`Missing required field: 'config.endpoint'`** — add an `endpoint` object under `config` for functions that receive inbound HTTP (for example OAuth callback routes).
+- **`Missing required field: 'config.endpoint.methods'`** plus **`additionalProperty: method`** — the schema expects **`methods`** (array of verbs, e.g. `["GET"]`, `["POST"]`), not a singular **`method`** field. Remove `method` and use `methods` instead.
+
+Always run **`hs project validate`** after editing function metadata; if the validator disagrees with an older doc example, follow the **validator** for your installed **`hs --version`**. Details and examples: `references/serverless-app-function-hsmeta.md`.
+
 ## File layout rules
 
 CLI templates evolve. After `hs project add`, **mirror the generated paths** instead of inventing filenames. Commonly you will see extension code under paths such as `src/app/cards/` with a shared `package.json` per feature area; **confirm on disk** before advising moves or imports.
@@ -154,6 +165,7 @@ Use these for deeper patterns without duplicating them entirely in chat:
 - `references/ui-extensions-sdk-primer.md` — **`context` / `actions`**, hooks vs props, overlays, iframe modal, clipboard, logging.
 - `references/app-cards-metadata.md` — card **`*-hsmeta.json`** fields, **`objectTypes` + scopes**, sidebar vs CRM data components, help desk.
 - `references/serverless-and-enterprise.md` — **2026.03** serverless, **Enterprise install**, dev test accounts, vs CMS serverless.
+- `references/serverless-app-function-hsmeta.md` — **`config.endpoint`**, **`methods` vs `method`**, **`hs project validate`** / upload failures.
 - `references/testing-and-linting.md` — **`createRenderer`**, `@hubspot/ui-extensions/testing`, **`@hubspot/eslint-config-ui-extensions`**, monitoring.
 - `references/marketplace-and-gated-features.md` — matrix reminders, **app objects approval**, webhooks v3/v4, listing readiness.
 - `references/hubspot-modern-platform.md` — platform concepts, CLI commands, migration outline.

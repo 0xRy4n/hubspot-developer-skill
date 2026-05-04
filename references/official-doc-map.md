@@ -59,6 +59,8 @@ Use this as a **navigation index**. Always confirm behavior on the linked page b
 - [Serverless function reference](https://developers.hubspot.com/docs/apps/developer-platform/add-features/serverless-functions/reference)
 - [Configurable test accounts](https://developers.hubspot.com/docs/apps/developer-platform/add-features/serverless-functions/developer-tooling/local-development/configurable-test-accounts)
 
+CLI: use **`hs project validate`** before **`hs project upload`** when `*-hsmeta.json` schema errors appear. For **`config.endpoint`** / **`methods`** array vs `method`, see bundled **`references/serverless-app-function-hsmeta.md`**.
+
 ## Other add-ons (verify against distribution/auth)
 
 - [Agent tools overview](https://developers.hubspot.com/docs/apps/developer-platform/add-features/agent-tools/overview)

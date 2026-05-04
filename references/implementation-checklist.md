@@ -27,6 +27,7 @@
 - Keeps payloads and response sizes within limits.
 - Avoids sensitive data leakage to external services.
 - If app objects or other gated features appear: confirms HubSpot **access / approval** and correct distribution model (`references/marketplace-and-gated-features.md`).
+- Serverless **`app-function`** metadata: **`uid`** unique; **`config.endpoint`** present when HTTP exposure is required; **`methods`** array schema satisfied (`references/serverless-app-function-hsmeta.md`).
 
 ## Testing checklist
 
@@ -38,9 +39,12 @@ hs project install-deps
 npm run lint
 npm run typecheck
 npm test
+hs project validate
 hs project dev
 hs project upload
 ```
+
+For **`app-function`** `*-hsmeta.json` files, run **`hs project validate`** before upload; fix **`config.endpoint`** and use **`endpoint.methods`** (array), not a singular **`method`**, when the validator requires it (`references/serverless-app-function-hsmeta.md`).
 
 Where UI extension unit tests exist, prefer **`createRenderer`** from `@hubspot/ui-extensions/testing` with the correct extension point string (`references/testing-and-linting.md`).
 

@@ -29,3 +29,7 @@ CMS serverless is documented under [CMS serverless functions](https://developers
 - [Create serverless functions](https://developers.hubspot.com/docs/apps/developer-platform/add-features/serverless-functions/create-serverless-functions) — walkthrough including app card + function wiring.
 - [Serverless function reference](https://developers.hubspot.com/docs/apps/developer-platform/add-features/serverless-functions/reference) — structure, schema, limits.
 - [Configurable test accounts](https://developers.hubspot.com/docs/apps/developer-platform/add-features/serverless-functions/developer-tooling/local-development/configurable-test-accounts) — local/serverless testing configuration.
+
+## Upload validation gotchas
+
+If **`hs project upload`** fails on `functions/*-hsmeta.json` with missing **`config.endpoint`** or complaints about **`method`** vs **`methods`**, see **`references/serverless-app-function-hsmeta.md`** and run **`hs project validate`**.
