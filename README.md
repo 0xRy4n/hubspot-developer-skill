@@ -6,28 +6,11 @@ Agent skill for building and reviewing **HubSpot developer platform** projects: 
 
 Use the open [Skills CLI](https://github.com/vercel-labs/skills) (`npx skills`). It wires this package into each agent’s expected layout (for example **Cursor** under the project’s `.agents/skills/`, and **Claude Code** via symlink when installing globally).
 
-### From GitHub (after you publish this repo)
-
-From the **app or library project** where you want the skill (not from a clone of this skill used only as source):
+### From GitHub
 
 ```bash
-npx skills add YOUR_GITHUB_USER/hubspot-developer-skill -y
+npx skills add 0xry4n/hubspot-developer-skill -y
 ```
-
-Use the same `owner/repo` form you would for `git clone`. Full URLs are also accepted:
-
-```bash
-npx skills add https://github.com/YOUR_GITHUB_USER/hubspot-developer-skill -y
-```
-
-### From a local clone (while developing the skill)
-
-```bash
-cd /path/to/your-app   # any folder with a package.json is fine
-npx skills add /path/to/hubspot-developer-skill -y
-```
-
-Relative paths work (for example `npx skills add ../hubspot-developer-skill`).
 
 ### Useful CLI flags
 
